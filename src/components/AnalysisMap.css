@@ -1,0 +1,38 @@
+/* AnalysisMap.css */
+.select-wrapper {
+	position: relative;
+	display: inline-block;
+	width: 120px; /* Select box width */
+}
+
+.select-box {
+	width: 100%;
+	padding: 8px 30px 8px 12px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	color: #333;
+	font-size: 14px;
+	cursor: pointer;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	appearance: none;
+	outline: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	height: 40px;
+	position: relative;
+	z-index: 1;
+}
+
+.chevron {
+	position: absolute;
+	top: 50%;
+	right: 10px;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 6px solid #333;
+	transform: translateY(-50%);
+	pointer-events: none;
+	z-index: 2;
+}
