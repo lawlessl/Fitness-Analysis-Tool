@@ -1,52 +1,32 @@
 # Fitness-Analysis-Tool
 
-# React + TypeScript + Vite
+## Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The Activity Data Visualization Platform is a web application designed to help users analyze and visualize their fitness activity data. The platform allows users to upload their activity files, securely store the data, and explore various data visualizations to gain insights into their activities.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication**: Secure user authentication using Firebase Authentication. Users can sign in using their Google accounts.
+- **File Upload**: Users can upload their activity files in `.fit` formats, `.gpx` (coming soon).
+- **Data Parsing**: Uploaded files are parsed to extract relevant activity data.
+- **Data Storage**: Parsed activity data is stored in Firebase Firestore for persistent storage.
+- **Data Visualization**: Visualize activity data with custom D3.js charts and graphs.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend**:
 
-- Configure the top-level `parserOptions` property like this:
+  - **React**: A JavaScript library for building user interfaces.
+  - **TypeScript**: A statically typed superset of JavaScript.
+  - **Firebase**: For authentication and real-time database.
+  - **Libraries**: `axios`, `react-router-dom`, `leaflet`, and `fit-file-parser`.
 
-```js
-export default tseslint.config({
-	languageOptions: {
-		// other options...
-		parserOptions: {
-			project: ['./tsconfig.node.json', './tsconfig.app.json'],
-			tsconfigRootDir: import.meta.dirname,
-		},
-	},
-});
-```
+- **Backend** (optional):
+  - **Firebase Firestore**: For storing activity data.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
+### Prerequisites
 
-export default tseslint.config({
-	// Set the react version
-	settings: { react: { version: '18.3' } },
-	plugins: {
-		// Add the react plugin
-		react,
-	},
-	rules: {
-		// other rules...
-		// Enable its recommended rules
-		...react.configs.recommended.rules,
-		...react.configs['jsx-runtime'].rules,
-	},
-});
-```
+- Node.js (v14 or higher)
+- npm (v7 or higher)
