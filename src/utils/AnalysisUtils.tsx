@@ -169,3 +169,26 @@ export const smoothArray = (data: number[], rangeInSeconds: number): number[] =>
 
 	return smoothedData;
 };
+
+/**
+ * Calculates the total elevation gain from the altitude data in the workout.
+ *
+ * @param altitude - The altitude data from the workout.
+ * @returns The total elevation gain in feet.
+ */
+export const calculateTotalElevationGain = (altitude: number[]): number => {
+	let totalElevationGain = 0;
+	let previousAltitude = altitude[0]; // Initialize with the first altitude value
+
+	for (let i = 1; i < altitude.length; i++) {
+		const currentAltitude = altitude[i];
+
+		if (currentAltitude > previousAltitude) {
+			totalElevationGain += currentAltitude - previousAltitude;
+		}
+
+		previousAltitude = currentAltitude; // Update for the next iteration
+	}
+
+	return totalElevationGain;
+};

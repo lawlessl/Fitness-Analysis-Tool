@@ -15,6 +15,18 @@ export function convertSecondsToTime(seconds: number): string {
 	return (hoursDisplay + minutesDisplay + secondsDisplay).trim();
 }
 
+export function convertSecondsToHHMMSS(seconds: number): string {
+	const hours = Math.floor(seconds / 3600);
+	const minutes = Math.floor((seconds % 3600) / 60);
+	const remainingSeconds = Math.round(seconds % 60);
+
+	const hoursDisplay = hours > 0 ? (hours >= 10 ? `${hours}:` : `0${hours}:`) : '';
+	const minutesDisplay = minutes > 0 ? (minutes >= 10 ? `${minutes}:` : `0${minutes}:`) : '';
+	const secondsDisplay = remainingSeconds >= 10 ? `${remainingSeconds}` : `0${remainingSeconds}`;
+
+	return (hoursDisplay + minutesDisplay + secondsDisplay).trim();
+}
+
 export function timestampToDateStr(timestamp: string): string {
 	// Create a Date object from the ISO string
 	const date = new Date(timestamp);

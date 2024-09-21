@@ -79,6 +79,8 @@ const AnalysisPage: React.FC = () => {
 	// Build the data object dynamically
 	const data: Record<string, MetricData> = {};
 
+	console.log(activity);
+
 	// Define all metrics here
 	const metrics: Record<string, MetricData> = {
 		Distance: {
@@ -136,7 +138,7 @@ const AnalysisPage: React.FC = () => {
 		}
 	}
 
-	const brickHeight = 150;
+	const brickHeight = 120; // Height of each individual metric chart
 
 	return (
 		<>
@@ -178,7 +180,7 @@ const AnalysisPage: React.FC = () => {
 							</Menu>
 						</Box>
 						{/* Activity Summary */}
-						<ActivitySummary data={data} />
+						<ActivitySummary activity={activity} />
 					</Flex>
 
 					{/* Confirmation Modal */}

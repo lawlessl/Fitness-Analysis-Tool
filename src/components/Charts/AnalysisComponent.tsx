@@ -420,7 +420,6 @@ const AnalysisComponent: React.FC<AnalysisComponentProps> = ({ data, brickHeight
 				fitBoundsType={boundsType}
 				mouseIndex={mouseIndex}
 			/>
-
 			<Flex direction="row" w="100%" h="100%" p={0} borderTop={`1px solid ${chartBorderColors}`}>
 				<Flex direction="column" align="flex-start">
 					<Box w="120px" h={`${margin.top}px`} backgroundColor={topAxisBarColor} zIndex={0}></Box>
