@@ -1,53 +1,3 @@
-// //useFetchAllActivities.tsx
-// import { collection, getDocs } from 'firebase/firestore';
-// import { ReactNode, useEffect, useState } from 'react';
-// import { db } from '../firebaseConfig';
-// import useUser from './useUser';
-
-// interface ActivityData {
-// 	id: string;
-// 	fileName: string;
-// 	fileType: string;
-// 	baseFileName: string;
-// 	sessions?: ReactNode;
-// 	sports?: ReactNode;
-// }
-
-// const useFetchAllActivities = () => {
-// 	const [activities, setActivities] = useState<ActivityData[]>([]);
-// 	const user = useUser();
-
-// 	useEffect(() => {
-// 		const fetchActivities = async () => {
-// 			if (user) {
-// 				try {
-// 					const activitiesCollectionRef = collection(db, 'users', user.uid, 'activities');
-// 					const querySnapshot = await getDocs(activitiesCollectionRef);
-
-// 					const activityData = querySnapshot.docs.map((doc) => ({
-// 						id: doc.id,
-// 						fileName: doc.data().fileName,
-// 						baseFileName: doc.data().baseFileName,
-// 						fileType: doc.data().fileType,
-// 						sessions: doc.data().parsedData.activity.sessions,
-// 						sports: doc.data().parsedData.activity.sports,
-// 					}));
-
-// 					setActivities(activityData);
-// 				} catch (error) {
-// 					console.error('Error fetching activities:', error);
-// 				}
-// 			}
-// 		};
-
-// 		fetchActivities();
-// 	}, [user]);
-
-// 	return activities;
-// };
-
-// export default useFetchAllActivities;
-
 //useFetchAllActivities.tsx;
 import { collection, getDocs, limit, query, startAfter } from 'firebase/firestore';
 import { useCallback, useEffect, useState } from 'react';
@@ -59,6 +9,10 @@ interface ActivityData {
 	fileName: string;
 	fileType: string;
 	baseFileName: string;
+	activityDate: {
+		seconds: number;
+		nanoseconds: number;
+	};
 }
 
 const useFetchAllActivities = () => {
@@ -84,6 +38,7 @@ const useFetchAllActivities = () => {
 						fileName: doc.data().fileName,
 						baseFileName: doc.data().baseFileName,
 						fileType: doc.data().fileType,
+						activityDate: doc.data().activityDate,
 					}));
 
 					// Ensure unique activities in state

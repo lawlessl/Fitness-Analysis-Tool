@@ -1,4 +1,15 @@
-import { Box, HStack, Link, Text, useBreakpointValue, useColorModeValue } from '@chakra-ui/react';
+import {
+	Box,
+	HStack,
+	Link,
+	Stat,
+	StatLabel,
+	StatNumber,
+	Text,
+	useBreakpointValue,
+	useColorModeValue,
+} from '@chakra-ui/react';
+import { Bicycle, SneakerMove } from '@phosphor-icons/react';
 import { forwardRef } from 'react';
 import useFetchSingleActivity from '../hooks/useFetchSingleActivity';
 import { getAllRecords } from '../utils/AnalysisUtils';
@@ -29,13 +40,26 @@ const ActivityCard = forwardRef<HTMLDivElement, ActivityCardProps>(({ id, baseFi
 	}
 
 	// Define the activity session which provides totals, averages, and maximums
+	console.log(activity);
 	const session = activity.parsedData.activity.sessions?.[0];
 	const events = activity.parsedData.activity.events;
 
-	const totalDistanceKm = session.total_distance; // Total distance traveled during activity
+	const totalDistance = session.total_distance;
+	const activitySport = session.sport;
+	const activitySubSport = session.sub_sport;
 	const activityDate = events[0].timestamp;
 
 	const records = getAllRecords(activity);
+
+	// Determine the icon based on the sport
+	const getSportIcon = (sport: string, subSport: string) => {
+		if (sport === 'cycling' && subSport === 'road') {
+			return <Bicycle size={24} />;
+		} else if (sport === 'running') {
+			return <SneakerMove size={24} />;
+		}
+		return null;
+	};
 
 	return (
 		<Box
@@ -49,7 +73,12 @@ const ActivityCard = forwardRef<HTMLDivElement, ActivityCardProps>(({ id, baseFi
 			marginBottom="1"
 			textAlign="center"
 			backgroundColor={bgColor}
+			minW={'400px'}
+			position="relative" // Add relative positioning for the icon
 		>
+			<Box position="absolute" top="4" right="4">
+				{getSportIcon(activitySport, activitySubSport)}
+			</Box>
 			<Box pl={1} pb={4}>
 				<Text align={'left'}>
 					<Link href={`/activity/${id}`} _hover={{ textDecoration: 'none' }} fontWeight={'bold'} fontSize={'xl'}>
@@ -59,30 +88,27 @@ const ActivityCard = forwardRef<HTMLDivElement, ActivityCardProps>(({ id, baseFi
 				<Text fontSize={'xs'} align={'left'} color={'dark gray'}>
 					{timestampToDateStr(activityDate)}
 				</Text>
-				<HStack h={'50px'} spacing={7} direction={'row'} align={'center'} justify="center" mt={2}>
-					<Box>
-						<Text fontSize={'sm'}>Distance</Text>
-						<Text>{totalDistanceKm.toFixed(2)}mi</Text>
-					</Box>
+				<HStack h={'50px'} spacing={4} direction={'row'} align={'center'} justify="center" mt={2}>
+					<Stat>
+						<StatNumber fontSize={'xl'}>{totalDistance.toFixed(2)}mi</StatNumber>
+						<StatLabel fontSize={'xs'} color={'#5e5e5e'}>
+							Distance
+						</StatLabel>
+					</Stat>
 					<Box width="1px" height="100%" bg="gray.200" mx={2} />
-					{/* {session.avg_power ? (
-						<>
-							<Box>
-								<Text fontSize={'sm'}>Avg Power</Text>
-								<Text>{session.avg_power}</Text>
-							</Box>
-							<Box width="1px" height="100%" bg="gray.200" mx={2} />
-						</>
-					) : null} */}
-					<Box>
-						<Text fontSize="sm">Elapsed Time</Text>
-						<Text>{convertSecondsToTime(session.total_elapsed_time)}</Text>
-					</Box>
+					<Stat>
+						<StatNumber fontSize={'xl'}>{convertSecondsToTime(session.total_elapsed_time)}</StatNumber>
+						<StatLabel fontSize={'xs'} color={'#5e5e5e'}>
+							Elapsed Time
+						</StatLabel>
+					</Stat>
 					<Box width="1px" height="100%" bg="gray.200" mx={2} />
-					<Box>
-						<Text fontSize="sm">Moving Time</Text>
-						<Text>{convertSecondsToTime(session.total_timer_time)}</Text>
-					</Box>
+					<Stat>
+						<StatNumber fontSize={'xl'}>{convertSecondsToTime(session.total_timer_time)}</StatNumber>
+						<StatLabel fontSize={'xs'} color={'#5e5e5e'}>
+							Moving Time
+						</StatLabel>
+					</Stat>
 				</HStack>
 			</Box>
 			<MapComponent records={records} />

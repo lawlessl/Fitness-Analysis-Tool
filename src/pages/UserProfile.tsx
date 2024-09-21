@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormLabel, Heading, Input, Link, Stack, Text, Textarea } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Heading, Input, Stack, Text, Textarea } from '@chakra-ui/react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout/Layout';
@@ -42,50 +42,6 @@ const UserProfile = () => {
 	if (loading) return <div>Loading...</div>;
 
 	return (
-		// <div>
-		// 	<h1>Welcome, {user?.displayName}</h1>
-		// 	<form onSubmit={handleSubmit}>
-		// 		<div>
-		// 			<label>Name:</label>
-		// 			<input type="text" name="name" value={userData.name} onChange={handleChange} />
-		// 		</div>
-		// 		<div>
-		// 			<label>Age:</label>
-		// 			<input type="text" name="age" value={userData.age} onChange={handleChange} />
-		// 		</div>
-		// 		<div>
-		// 			<label>Bio:</label>
-		// 			<textarea name="bio" value={userData.bio} onChange={handleChange} />
-		// 		</div>
-		// 		<button type="submit">Save</button>
-		// 	</form>
-
-		// 	<h2>Your Profile</h2>
-		// 	<p>
-		// 		<strong>Name:</strong> {userData.name}
-		// 	</p>
-		// 	<p>
-		// 		<strong>Age:</strong> {userData.age}
-		// 	</p>
-		// 	<p>
-		// 		<strong>Bio:</strong> {userData.bio}
-		// 	</p>
-		// 	<div>
-		// 		<p>
-		// 			If you want to return home, click <a href="/">Here</a>
-		// 		</p>
-		// 	</div>
-		// </div>
-
-		// <Layout>
-		// 	<Text>Welcome, {user?.displayName}</Text>
-		// 	<Box alignItems={'center'} w={'50vw'}>
-		// 		<FormControl>
-		// 			<FormLabel>Name</FormLabel>
-		// 			<Input type="text" />
-		// 		</FormControl>
-		// 	</Box>
-		// </Layout>
 		<Layout>
 			<Box p={4}>
 				<Heading as="h1" mb={6}>
@@ -125,15 +81,6 @@ const UserProfile = () => {
 						<strong>Bio:</strong> {userData.bio}
 					</Text>
 				</Stack>
-
-				<Box mt={8}>
-					<Text>
-						If you want to return home, click{' '}
-						<Link href="/" color="blue.500">
-							Here
-						</Link>
-					</Text>
-				</Box>
 			</Box>
 		</Layout>
 	);

@@ -40,14 +40,16 @@ const Dashboard: React.FC = () => {
 	return (
 		<Layout>
 			<VStack spacing={2}>
-				{activities.map((activity) => (
-					<ActivityCard
-						key={activity.id}
-						fileName={activity.fileName}
-						baseFileName={activity.baseFileName}
-						id={activity.id}
-					/>
-				))}
+				{activities
+					.sort((a, b) => b.activityDate.seconds - a.activityDate.seconds)
+					.map((activity) => (
+						<ActivityCard
+							key={activity.id}
+							fileName={activity.fileName}
+							baseFileName={activity.baseFileName}
+							id={activity.id}
+						/>
+					))}
 				{loading && <Spinner size="lg" />} {/* Show loading spinner */}
 				{hasMore && !loading && <Button onClick={fetchMoreActivities}>Load More Activities</Button>}
 			</VStack>
